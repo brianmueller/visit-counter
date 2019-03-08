@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Bootstrap Sandbox</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+    <div class="container">
+        <h1># of times this page has been visited:</h1>
+        <div id="count"><img src="loading.gif"></div>
+    </div>
+
+    <script>
+        // endpoint
+        // https://www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15
+
+        // get the current count
+        async function updateCount() {
+            let currentCount = await fetch('https://www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15/count')
+                .then(function(response) {
+                    return response.json();
+
+                })
+
+            // increase the count by 1
+            let newCount = currentCount.result + 1
+            console.log(newCount)
+
+
+            return newCount;
+        }
+        updateCount();
+        // console.log(updateCount())
+
+        // post the new count
+        // fetch('https: //www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15/', {
+        //     headers: {
+        //         'Content-type': 'application/json'
+        //     },
+        //     method: 'POST',
+        //     body: { count: newCount },
+        // });
+    </script>
+</body>
+
+</html>
