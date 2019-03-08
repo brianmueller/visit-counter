@@ -4,15 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Bootstrap Sandbox</title>
+    <title>Visit Counter</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
 </head>
 
 <body>
@@ -22,9 +16,6 @@
     </div>
 
     <script>
-        // endpoint
-        // https://www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15
-
         // get the current count
         async function updateCount() {
             let currentCount = await fetch('https://www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15/count')
@@ -37,20 +28,28 @@
             let newCount = currentCount.result + 1
             console.log(newCount)
 
-
-            return newCount;
+            // post the new count
+            putCount(1)
+            
+            // show the new count
+            showCount(newCount)
         }
-        updateCount();
-        // console.log(updateCount())
+        updateCount()
 
-        // post the new count
-        // fetch('https: //www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15/', {
-        //     headers: {
-        //         'Content-type': 'application/json'
-        //     },
-        //     method: 'POST',
-        //     body: { count: newCount },
-        // });
+        // put the new count
+        function putCount(num) {
+            fetch('https://www.jsonstore.io/34aad9aee827a2294ace14ef3d59aa7c1bec18aa63e3d7ca310445c595fedf15/count', {
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                method: 'PUT',
+                body: num,
+            });
+        }
+        
+        function showCount(num){
+            document.querySelector('#count').innerHTML = "<h2>"+num+"</h2>"
+        }
     </script>
 </body>
 
